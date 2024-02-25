@@ -20,7 +20,7 @@ public class TicTacToe {
         System.out.println("Do you want a bot in the game? Y or N");
         String botAns = sc.next();
         if(botAns.equalsIgnoreCase("Y")){
-            Player bot = new Bot(id++, '$', BotDifficultyLevel.EASY);
+            Player bot = new Bot(id++, '$', BotDifficultyLevel.MEDIUM);
             playersList.add(bot);
         }
         while (id < dimension){
@@ -43,7 +43,7 @@ public class TicTacToe {
             Player currentPlayer = playersList.get(currentPlayerIndex);
             Move movePlayed = gameController.executeMove(game, currentPlayer);//execute move
             game.getMoves().add(movePlayed); //add moves to the list
-            Board currentBoard = game.getBoard().copy(); //create a copy of current board state and add to list
+            Board currentBoard = game.getBoard().clone(); //create a copy of current board state and add to list
             game.getBoardStates().add(currentBoard); //add board states after every move to the list
             Player winner = gameController.checkWinner(game, movePlayed); //check for winner
             if(winner != null){

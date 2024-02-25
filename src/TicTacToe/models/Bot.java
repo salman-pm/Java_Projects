@@ -13,6 +13,6 @@ public class Bot extends Player{
 
     @Override
     public Move makeMove(Board board) {
-        return BotPlayingStrategyFactory.getBotPlayingStrategy().makeMOve(board, this);
+        return BotPlayingStrategyFactory.getBotPlayingStrategy(botDifficultyLevel).makeMOve(board, this);
     }
 }

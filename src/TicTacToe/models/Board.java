@@ -37,7 +37,7 @@ public class Board {
         }
     }
 
-    public Board copy(){
+    public Board clone(){
         Board newBoard = new Board(this.dimension);
         for (int i=0; i<this.dimension; i++){
             for(int j=0; j<this.dimension; j++){
@@ -46,6 +46,19 @@ public class Board {
             }
         }
         return newBoard;
+    }
+
+    public List<Cell> getEmptyCells(){
+        List<Cell> listOfEmptyCells = new ArrayList<>();
+        for(int i=0; i<dimension; i++){
+            List<Cell> cells = matix.get(i);
+            for(Cell currentCell : cells){
+                if(currentCell.getCellState().equals(CellState.EMPTY)){
+                    listOfEmptyCells.add(currentCell);
+                }
+            }
+        }
+        return listOfEmptyCells;
     }
 
     public List<List<Cell>> getMatix() {
