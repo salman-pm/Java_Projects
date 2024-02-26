@@ -1,7 +1,9 @@
 package TicTacToe.models;
 
 import TicTacToe.exceptions.*;
+import TicTacToe.services.winningStrategy.OrderOfOneWinningStrategy;
 import TicTacToe.services.winningStrategy.WinningStrategy;
+import TicTacToe.services.winningStrategy.WinningStrategyFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -97,28 +99,6 @@ public class Game {
         return noOfSymbols;
     }
 
-    public void undo(){
-        if(moves.isEmpty()){
-            System.out.println("There is no moves to undo");
-            return;
-        }
-        //remove the last played move from list
-        int lastPlayedMoveIndex = moves.size() - 1;
-        Move lastPlayedMove = moves.remove(lastPlayedMoveIndex);
-
-        //update the cell
-        Cell lastPlayedCell = lastPlayedMove.getCell();
-        lastPlayedCell.setPlayer(null);
-        lastPlayedCell.setCellState(CellState.EMPTY);
-
-        //remove the last board state from list
-        int lastBoardIndex = boardStates.size() - 1;
-        Board lastBoardState = boardStates.remove(lastBoardIndex);
-
-        //update the counts in hashmaps in WinningStrategy
-        winningStrategy.handleUndo(lastBoardState, lastPlayedMove);
-    }
-
     public void setNoOfSymbols(int noOfSymbols) {
         this.noOfSymbols = noOfSymbols;
     }
@@ -203,5 +183,39 @@ public class Game {
             return new Game(new Board(dimension), players, winningStrategy);
         }
 
+    }
+
+    public void undo(){
+        if(moves.isEmpty()){
+            System.out.println("There is no moves to undo");
+            return;
+        }
+        //remove the last played move from list
+        int lastPlayedMoveIndex = moves.size() - 1;
+        Move lastPlayedMove = moves.remove(lastPlayedMoveIndex);
+
+        //update the cell
+        Cell lastPlayedCell = lastPlayedMove.getCell();
+        lastPlayedCell.setPlayer(null);
+        lastPlayedCell.setCellState(CellState.EMPTY);
+
+        //remove the last board state from list
+        int lastBoardIndex = boardStates.size() - 1;
+        Board lastBoardState = boardStates.remove(lastBoardIndex);
+
+        //update the counts in hashmaps in WinningStrategy
+        winningStrategy.handleUndo(lastBoardState, lastPlayedMove);
+    }
+
+    public boolean checkDraw(){
+        if(winningStrategy.getClass() != OrderOfOneWinningStrategy.class){
+            int noOfMoves = moves.size();
+            int totalNoOfCells = board.getDimension() * board.getDimension();
+            return noOfMoves ==  totalNoOfCells;
+        }
+
+        OrderOfOneWinningStrategy orderOfOneWinningStrategy = OrderOfOneWinningStrategy.getInstance(board.getDimension());
+//        return orderOfOneWinningStrategy.getSetOfHashMaps().isEmpty();
+        return orderOfOneWinningStrategy.checkDraw();
     }
 }

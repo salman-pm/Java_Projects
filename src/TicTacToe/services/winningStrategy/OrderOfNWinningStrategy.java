@@ -169,6 +169,5 @@ public class OrderOfNWinningStrategy implements WinningStrategy{
 
     @Override
     public void handleUndo(Board board, Move move) {
-
     }
 }

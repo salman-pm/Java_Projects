@@ -6,6 +6,7 @@ import TicTacToe.services.winningStrategy.WinningStrategy;
 import TicTacToe.services.winningStrategy.WinningStrategyFactory;
 import TicTacToe.services.winningStrategy.WinningStrategyNames;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class GameController {
@@ -62,9 +63,6 @@ public class GameController {
     }
 
     public boolean checkForDraw(Game game){
-        int dimensionOfBoard = game.getBoard().getDimension();
-        int noOfMoves = game.getMoves().size();
-        int totalCells =  dimensionOfBoard * dimensionOfBoard;
-        return noOfMoves == totalCells;
+        return game.checkDraw();
     }
 }
