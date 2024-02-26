@@ -41,8 +41,12 @@ public class Board {
         Board newBoard = new Board(this.dimension);
         for (int i=0; i<this.dimension; i++){
             for(int j=0; j<this.dimension; j++){
-                Player currentPlayer = this.getMatix().get(i).get(j).getPlayer();
-                newBoard.getMatix().get(i).get(j).setPlayer(currentPlayer);
+                Cell currentBoardCell = this.getMatix().get(i).get(j);
+                Cell newBoardCell = newBoard.getMatix().get(i).get(j);
+                if(currentBoardCell.getCellState().equals(CellState.FILLED)){
+                    newBoardCell.setPlayer(currentBoardCell.getPlayer());
+                    newBoardCell.setCellState(CellState.FILLED);
+                }
             }
         }
         return newBoard;

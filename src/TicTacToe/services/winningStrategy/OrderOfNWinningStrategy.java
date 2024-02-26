@@ -166,4 +166,9 @@ public class OrderOfNWinningStrategy implements WinningStrategy{
         }
         return totalCountOfSymbols == dimension;
     }
+
+    @Override
+    public void handleUndo(Board board, Move move) {
+
+    }
 }

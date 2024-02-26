@@ -2,6 +2,7 @@ package TicTacToe;
 
 import TicTacToe.controllers.GameController;
 import TicTacToe.models.*;
+import TicTacToe.services.winningStrategy.WinningStrategy;
 import TicTacToe.services.winningStrategy.WinningStrategyNames;
 
 import java.util.*;
@@ -38,10 +39,26 @@ public class TicTacToe {
         while(game.getGameStatus().equals(GameStatus.IN_PROGRESS)){
             System.out.println("Current Board Status : ");
             gameController.displayBoard(game);
-            currentPlayerIndex++;
+            //undo logic
+            if(currentPlayerIndex != -1){
+                Player lastMovedPlayer = playersList.get(currentPlayerIndex);
+                if(lastMovedPlayer.getPlayerType() != PlayerType.BOT){
+                    System.out.println("Hey " + lastMovedPlayer.getPlayerName() + " , Do you want to undo your last move? Y or N");
+                    String undoAns = sc.next();
+                    if(undoAns.charAt(0) == 'Y' || undoAns.charAt(0) == 'y'){
+                        int lastMovedIndex = game.getMoves().size() - 1;
+                        gameController.undoMove(game, game.getMoves().get(lastMovedIndex));
+                        currentPlayerIndex--; //-- so that ++ will stay at current player
+                    }
+                }
+            }
+            currentPlayerIndex++; //go to next player
             currentPlayerIndex = currentPlayerIndex % playersList.size();
             Player currentPlayer = playersList.get(currentPlayerIndex);
             Move movePlayed = gameController.executeMove(game, currentPlayer);//execute move
+            if(currentPlayer.getPlayerType().equals(PlayerType.BOT)){
+                System.out.println("BOT played a move");
+            }
             game.getMoves().add(movePlayed); //add moves to the list
             Board currentBoard = game.getBoard().clone(); //create a copy of current board state and add to list
             game.getBoardStates().add(currentBoard); //add board states after every move to the list

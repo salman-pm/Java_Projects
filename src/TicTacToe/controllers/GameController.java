@@ -1,6 +1,7 @@
 package TicTacToe.controllers;
 
 import TicTacToe.models.*;
+import TicTacToe.services.winningStrategy.OrderOfOneWinningStrategy;
 import TicTacToe.services.winningStrategy.WinningStrategy;
 import TicTacToe.services.winningStrategy.WinningStrategyFactory;
 import TicTacToe.services.winningStrategy.WinningStrategyNames;
@@ -38,24 +39,13 @@ public class GameController {
     }
 
     //undo will return a state of board after that move -> save board state after each move - Doremon undo method
-    public Board undoMove(Game game, Move lastPlayedMove){
-        //change the state of the last played cell and remove the player from the last played cell
-        lastPlayedMove.getCell().setCellState(CellState.EMPTY);
-        lastPlayedMove.getCell().setPlayer(null);
-        //remove the last board state and get the  previous board state(last move-1)  and return it
-        //int lastPlayedIndex = game.getMoves().indexOf(lastPlayedMove);
-        int lastPlayedIndex = game.getBoardStates().size()-1;
-        game.getBoardStates().remove(lastPlayedIndex);
-        return game.getBoardStates().get(lastPlayedIndex-1);
+    public void undoMove(Game game, Move lastPlayedMove){
+        game.undo();
     }
 
     public void replay(Game game){
         List<Board> listOfBoards = game.getBoardStates();
         List<Move> listOfMoves = game.getMoves();
-//        for(Board board : listOfBoards){
-//            board.displayBoard();
-//            System.out.println("------------------");
-//        }
         for(int i=0; i<listOfBoards.size(); i++){
             Player player = listOfMoves.get(i).getPlayer();
             Cell movedCell = listOfMoves.get(i).getCell();

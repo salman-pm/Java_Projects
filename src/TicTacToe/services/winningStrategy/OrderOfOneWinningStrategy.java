@@ -1,6 +1,7 @@
 package TicTacToe.services.winningStrategy;
 
 import TicTacToe.models.Board;
+import TicTacToe.models.Cell;
 import TicTacToe.models.Move;
 import TicTacToe.models.Player;
 
@@ -25,6 +26,32 @@ public class OrderOfOneWinningStrategy implements WinningStrategy{
         for(int i=0; i<dimension; i++){
             rowCountHashMapList.add(new HashMap<>());
             columnCountHashMapList.add(new HashMap<>());
+        }
+    }
+    @Override
+    public void handleUndo(Board board, Move move) {
+        Cell lastPlayedCell = move.getCell();
+        int row =  lastPlayedCell.getRow();
+        int col = lastPlayedCell.getColumn();
+        char symbol = move.getPlayer().getSymbol();
+        //get the HashMaps of row and column from their list
+        HashMap<Character, Integer> rowHM = rowCountHashMapList.get(row);
+        HashMap<Character, Integer> colHM = columnCountHashMapList.get(col);
+        //update HashMap of the row
+        rowHM.put(symbol, rowHM.get(symbol) - 1);
+        //update the HashMap of column
+        colHM.put(symbol, colHM.get(symbol) - 1);
+        //check and update HashMap of left diagonal
+        if(checkIfCellIsInLeftDiagnolOrNot(row, col)){
+            leftDiagnolCountHashMap.put(symbol, leftDiagnolCountHashMap.get(symbol) - 1);
+        }
+        //check and update HashMap of right diagonal
+        if(checkIfCellIsInRightDiagnolOrNot(row, col)){
+            rightDiagnolCountHashMap.put(symbol, rightDiagnolCountHashMap.get(symbol) - 1);
+        }
+        //check and update corner cell
+        if(checkIfCellIsCornerOrNot(row, col)){
+            cornerCountHashMap.put(symbol, cornerCountHashMap.get(symbol) - 1);
         }
     }
     @Override
@@ -80,5 +107,53 @@ public class OrderOfOneWinningStrategy implements WinningStrategy{
     }
     private boolean checkAndUpdateRightDiagnol(char symbol){
         return commonWinnerCheckAndUpdate(symbol, rightDiagnolCountHashMap);
+    }
+
+    public int getDimension() {
+        return dimension;
+    }
+
+    public void setDimension(int dimension) {
+        this.dimension = dimension;
+    }
+
+    public List<HashMap<Character, Integer>> getRowCountHashMapList() {
+        return rowCountHashMapList;
+    }
+
+    public void setRowCountHashMapList(List<HashMap<Character, Integer>> rowCountHashMapList) {
+        this.rowCountHashMapList = rowCountHashMapList;
+    }
+
+    public List<HashMap<Character, Integer>> getColumnCountHashMapList() {
+        return columnCountHashMapList;
+    }
+
+    public void setColumnCountHashMapList(List<HashMap<Character, Integer>> columnCountHashMapList) {
+        this.columnCountHashMapList = columnCountHashMapList;
+    }
+
+    public HashMap<Character, Integer> getLeftDiagnolCountHashMap() {
+        return leftDiagnolCountHashMap;
+    }
+
+    public void setLeftDiagnolCountHashMap(HashMap<Character, Integer> leftDiagnolCountHashMap) {
+        this.leftDiagnolCountHashMap = leftDiagnolCountHashMap;
+    }
+
+    public HashMap<Character, Integer> getRightDiagnolCountHashMap() {
+        return rightDiagnolCountHashMap;
+    }
+
+    public void setRightDiagnolCountHashMap(HashMap<Character, Integer> rightDiagnolCountHashMap) {
+        this.rightDiagnolCountHashMap = rightDiagnolCountHashMap;
+    }
+
+    public HashMap<Character, Integer> getCornerCountHashMap() {
+        return cornerCountHashMap;
+    }
+
+    public void setCornerCountHashMap(HashMap<Character, Integer> cornerCountHashMap) {
+        this.cornerCountHashMap = cornerCountHashMap;
     }
 }

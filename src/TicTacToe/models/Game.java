@@ -97,6 +97,28 @@ public class Game {
         return noOfSymbols;
     }
 
+    public void undo(){
+        if(moves.isEmpty()){
+            System.out.println("There is no moves to undo");
+            return;
+        }
+        //remove the last played move from list
+        int lastPlayedMoveIndex = moves.size() - 1;
+        Move lastPlayedMove = moves.remove(lastPlayedMoveIndex);
+
+        //update the cell
+        Cell lastPlayedCell = lastPlayedMove.getCell();
+        lastPlayedCell.setPlayer(null);
+        lastPlayedCell.setCellState(CellState.EMPTY);
+
+        //remove the last board state from list
+        int lastBoardIndex = boardStates.size() - 1;
+        Board lastBoardState = boardStates.remove(lastBoardIndex);
+
+        //update the counts in hashmaps in WinningStrategy
+        winningStrategy.handleUndo(lastBoardState, lastPlayedMove);
+    }
+
     public void setNoOfSymbols(int noOfSymbols) {
         this.noOfSymbols = noOfSymbols;
     }
@@ -139,15 +161,6 @@ public class Game {
         }
 
         public void validateBotCount(){
-//            int botCount = 0;
-//            for(Player player : players){
-//                if(player.getPlayerType().equals(PlayerType.BOT)){
-//                    botCount++;
-//                }
-//                if(botCount > 1){
-//                    throw  new InvalidBotCountException("Maximum of 1 Bot is allowed in a game");
-//                }
-//            }
             long noOfBots = players.stream()
                                    .filter(player -> player.getPlayerType().equals(PlayerType.BOT))
                                    .count();
@@ -172,7 +185,7 @@ public class Game {
             }
         }
 
-        public void validateDimenstion(){
+        public void validateDimension(){
             if(dimension<3 || dimension>10){
                 throw new InvalidBoardSizeException("Board size should be between 3 and 10");
             }
@@ -182,6 +195,7 @@ public class Game {
             validateNumberOfPlayers();
             validateSymbols();
             validateBotCount();
+            validateDimension();
         }
 
         public Game build(){

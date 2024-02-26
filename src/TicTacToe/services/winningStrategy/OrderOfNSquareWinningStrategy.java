@@ -15,4 +15,9 @@ public class OrderOfNSquareWinningStrategy implements WinningStrategy{
     public Player checkWinner(Board board, Move lastMove) {
         return null;
     }
+
+    @Override
+    public void handleUndo(Board board, Move move) {
+
+    }
 }
