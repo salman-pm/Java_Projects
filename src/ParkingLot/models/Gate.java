@@ -3,7 +3,7 @@ package ParkingLot.models;
 import ParkingLot.models.enums.GateStatus;
 import ParkingLot.models.enums.GateType;
 
-public class Gate {
+public class Gate extends BaseModel{
     private int gateNumber;
     private GateType gateType;
     private GateStatus gateStatus;

@@ -2,8 +2,8 @@ package ParkingLot.models;
 
 import ParkingLot.models.enums.VehicleType;
 
-public class Vehicle {
-    private String vehicleName;
+public class Vehicle extends BaseModel{
+    private String vehicleModel;
     private int vehicleNumber;
     private VehicleType vehicleType;
     private String color;
@@ -11,19 +11,19 @@ public class Vehicle {
     public Vehicle(){
     }
 
-    public Vehicle(String vehicleName, int vehicleNumber, VehicleType vehicleType, String color) {
-        this.vehicleName = vehicleName;
+    public Vehicle(String vehicleModel, int vehicleNumber, VehicleType vehicleType, String color) {
+        this.vehicleModel = vehicleModel;
         this.vehicleNumber = vehicleNumber;
         this.vehicleType = vehicleType;
         this.color = color;
     }
 
-    public String getVehicleName() {
-        return vehicleName;
+    public String getVehicleModel() {
+        return vehicleModel;
     }
 
-    public void setVehicleName(String vehicleName) {
-        this.vehicleName = vehicleName;
+    public void setVehicleModel(String vehicleModel) {
+        this.vehicleModel = vehicleModel;
     }
 
     public int getVehicleNumber() {

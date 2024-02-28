@@ -7,7 +7,7 @@ import ParkingLot.services.spotAllocationStrategy.SpotAllocationStrategy;
 
 import java.util.List;
 
-public class ParkingLot {
+public class ParkingLot extends BaseModel{
     private String name;
     private String address;
     private int capacity;

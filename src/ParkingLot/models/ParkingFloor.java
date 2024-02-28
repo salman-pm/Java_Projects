@@ -4,7 +4,7 @@ import ParkingLot.models.enums.ParkingFloorStatus;
 
 import java.util.List;
 
-public class ParkingFloor {
+public class ParkingFloor extends BaseModel{
     private int floorNUmber;
     private List<ParkingSpot> parkingSpotList;
     private Gate entryGate;

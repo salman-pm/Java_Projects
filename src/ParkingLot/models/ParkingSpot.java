@@ -3,7 +3,7 @@ package ParkingLot.models;
 import ParkingLot.models.enums.ParkingSpotStatus;
 import ParkingLot.models.enums.VehicleType;
 
-public class ParkingSpot {
+public class ParkingSpot extends BaseModel{
     private int spotNumber;
     private VehicleType vehicleType;
     private Vehicle vehicle;
