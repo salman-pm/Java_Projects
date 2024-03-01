@@ -20,7 +20,7 @@ public class GateRepository {
         return gate;
     }
 
-    public void add(Gate gate){
+    public void put(Gate gate){
         gateMap.put(gate.getId(), gate);
         System.out.println("Gate with id " + gate.getId() + " has been added successfully");
     }

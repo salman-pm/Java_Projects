@@ -7,16 +7,16 @@ public class Gate extends BaseModel{
     private int gateNumber;
     private GateType gateType;
     private GateStatus gateStatus;
-    private String operatorName;
+    private Employee operator;
 
     public Gate(){
     }
 
-    public Gate(int gateNumber, GateType gateType, GateStatus gateStatus, String operatorName) {
+    public Gate(int gateNumber, GateType gateType, GateStatus gateStatus, Employee operator) {
         this.gateNumber = gateNumber;
         this.gateType = gateType;
         this.gateStatus = gateStatus;
-        this.operatorName = operatorName;
+        this.operator = operator;
     }
 
     public int getGateNumber() {
@@ -43,11 +43,11 @@ public class Gate extends BaseModel{
         this.gateStatus = gateStatus;
     }
 
-    public String getOperatorName() {
-        return operatorName;
+    public Employee getOperator() {
+        return operator;
     }
 
-    public void setOperatorName(String operatorName) {
-        this.operatorName = operatorName;
+    public void setOperator(Employee operator) {
+        this.operator = operator;
     }
 }

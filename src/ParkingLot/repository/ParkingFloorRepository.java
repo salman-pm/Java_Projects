@@ -20,7 +20,7 @@ public class ParkingFloorRepository {
         return parkingFloor;
     }
 
-    public void add(ParkingFloor parkingFloor){
+    public void put(ParkingFloor parkingFloor){
         parkingFloorMap.put(parkingFloor.getId(), parkingFloor);
         System.out.println("Parking Floor with id " + parkingFloor.getId() + " has been added successfully");
     }

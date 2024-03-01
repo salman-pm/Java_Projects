@@ -21,7 +21,7 @@ public class EmployeeRepository {
         return employee;
     }
 
-    public void add(Employee employee){
+    public void put(Employee employee){
         employee.setId(++idCounter);
         employeeMap.put(employee.getId(), employee);
         System.out.println(employee.getDesignation() + " with id " + employee.getId() + " has been added successfully");

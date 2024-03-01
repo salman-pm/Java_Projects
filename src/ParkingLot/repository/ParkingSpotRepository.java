@@ -20,7 +20,7 @@ public class ParkingSpotRepository {
         return parkingSpot;
     }
 
-    public void add(ParkingSpot parkingSpot){
+    public void put(ParkingSpot parkingSpot){
         parkingSpotMap.put(parkingSpot.getId(), parkingSpot);
         System.out.println("Parking Spot with id " + parkingSpot.getId() + " has been added successfully");
     }

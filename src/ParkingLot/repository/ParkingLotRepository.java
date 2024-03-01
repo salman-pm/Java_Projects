@@ -21,7 +21,7 @@ public class ParkingLotRepository {
         return parkingLot;
     }
 
-    public void add(ParkingLot parkingLot){
+    public void put(ParkingLot parkingLot){
         parkingLot.setId(++idCounter);
         parkingLotMap.put(parkingLot.getId(), parkingLot);
         System.out.println("Parking Lot with id " + parkingLot.getId() + " has been added successfully");

@@ -21,7 +21,7 @@ public class PaymentRepository {
         return payment;
     }
 
-    public void add(Payment payment){
+    public void put(Payment payment){
         payment.setId(++idCounter);
         paymentMap.put(payment.getId(), payment);
         System.out.println("Payment with id " + payment.getId() + " has been added successfully");

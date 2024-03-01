@@ -21,7 +21,7 @@ public class VehicleRepository {
         return vehicle;
     }
 
-    public void add(Vehicle vehicle){
+    public void put(Vehicle vehicle){
         vehicle.setId(++idCounter);
         vehicleMap.put(vehicle.getId(), vehicle);
         System.out.println("Vehicle with id " + vehicle.getId() + " has been added successfully");

@@ -20,7 +20,10 @@ public class ParkingLot extends BaseModel{
     public ParkingLot(){
     }
 
-    public ParkingLot(String name, String address, int capacity, List<ParkingFloor> parkingFloorList, List<VehicleType> supportedVehicleTypeList, ParkingLotStatus parkingLotStatus, BillCalculationStrategy billCalculationStrategy, SpotAllocationStrategy spotAllocationStrategy) {
+    public ParkingLot(String name, String address, int capacity,
+                      List<ParkingFloor> parkingFloorList, List<VehicleType> supportedVehicleTypeList,
+                      ParkingLotStatus parkingLotStatus, BillCalculationStrategy billCalculationStrategy,
+                      SpotAllocationStrategy spotAllocationStrategy) {
         this.name = name;
         this.address = address;
         this.capacity = capacity;

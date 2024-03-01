@@ -5,7 +5,7 @@ import ParkingLot.models.enums.ParkingFloorStatus;
 import java.util.List;
 
 public class ParkingFloor extends BaseModel{
-    private int floorNUmber;
+    private int floorNumber;
     private List<ParkingSpot> parkingSpotList;
     private Gate entryGate;
     private Gate exitGate;
@@ -14,8 +14,8 @@ public class ParkingFloor extends BaseModel{
     public ParkingFloor(){
     }
 
-    public ParkingFloor(int floorNUmber, List<ParkingSpot> parkingSpotList, Gate entryGate, Gate exitGate, ParkingFloorStatus parkingFloorStatus) {
-        this.floorNUmber = floorNUmber;
+    public ParkingFloor(int floorNumber, List<ParkingSpot> parkingSpotList, Gate entryGate, Gate exitGate, ParkingFloorStatus parkingFloorStatus) {
+        this.floorNumber = floorNumber;
         this.parkingSpotList = parkingSpotList;
         this.entryGate = entryGate;
         this.exitGate = exitGate;
@@ -23,11 +23,11 @@ public class ParkingFloor extends BaseModel{
     }
 
     public int getFloorNUmber() {
-        return floorNUmber;
+        return floorNumber;
     }
 
     public void setFloorNUmber(int floorNUmber) {
-        this.floorNUmber = floorNUmber;
+        this.floorNumber = floorNUmber;
     }
 
     public List<ParkingSpot> getParkingSpotList() {

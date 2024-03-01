@@ -21,7 +21,7 @@ public class BillRepository {
         return bill;
     }
 
-    public void add(Bill bill){
+    public void put(Bill bill){
         bill.setId(++idCounter);
         billMap.put(bill.getId(), bill);
         System.out.println("Bill with id " + bill.getId() + " has been added successfully");

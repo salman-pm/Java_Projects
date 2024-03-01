@@ -5,5 +5,5 @@ import ParkingLot.models.ParkingSpot;
 import ParkingLot.models.Vehicle;
 
 public interface SpotAllocationStrategy {
-    ParkingSpot allocateSpotForVehicle(Vehicle vehicle);
+    ParkingSpot allocateSpotForVehicle(ParkingLot parkingLot, Vehicle vehicle);
 }
