@@ -4,7 +4,7 @@ import ParkingLot.models.enums.BillStatus;
 
 import java.time.LocalDateTime;
 
-public class Bill{
+public class Bill extends BaseModel{
     private LocalDateTime exitTime;
     private double amount;
     private BillStatus billStatus;

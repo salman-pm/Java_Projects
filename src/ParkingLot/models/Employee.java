@@ -1,19 +1,23 @@
 package ParkingLot.models;
 
-public class Operator extends BaseModel{
+import ParkingLot.models.enums.DesignationType;
+
+public class Employee extends BaseModel{
     private String name;
     private String phoneNo;
     private String emailId;
     private String address;
+    private DesignationType designation;
 
-    public Operator(){
+    public Employee(){
     }
 
-    public Operator(String name, String phoneNo, String emailId, String address) {
+    public Employee(String name, String phoneNo, String emailId, String address, DesignationType designation) {
         this.name = name;
         this.phoneNo = phoneNo;
         this.emailId = emailId;
         this.address = address;
+        this.designation = designation;
     }
 
     public String getName() {
@@ -46,5 +50,13 @@ public class Operator extends BaseModel{
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public DesignationType getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(DesignationType designation) {
+        this.designation = designation;
     }
 }
