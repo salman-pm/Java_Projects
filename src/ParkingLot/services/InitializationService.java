@@ -32,7 +32,8 @@ public class InitializationService {
         ParkingLot parkingLot = new ParkingLot();
         parkingLot.setName("ABC Parking Lot");
         parkingLot.setAddress("Somewhere under the sky");
-        parkingLot.setCapacity(100);
+        parkingLot.setTotalCapacity(100);
+        parkingLot.setAvailableCapacity(100);
         parkingLot.setParkingLotStatus(ParkingLotStatus.OPEN);
         parkingLot.setSupportedVehicleTypeList(List.of(VehicleType.BIKE, VehicleType.CAR));
 

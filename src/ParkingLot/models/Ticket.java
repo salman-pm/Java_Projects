@@ -1,6 +1,7 @@
 package ParkingLot.models;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Ticket extends BaseModel{
     private LocalDateTime entryTime;
@@ -17,6 +18,17 @@ public class Ticket extends BaseModel{
         this.entryGate = entryGate;
         this.parkingSpot = parkingSpot;
         this.vehicle = vehicle;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                " \nTicket Id: " + getId() +
+                " \nEntryTime: " + DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").format(entryTime) +
+                ", \nEntryGate Number: " + entryGate.getGateNumber() +
+                ", \nParkingSpot Number: " + parkingSpot.getSpotNumber() +
+                ", \nVehicle Number: " + vehicle.getVehicleNumber() +
+                " \n}";
     }
 
     public LocalDateTime getEntryTime() {
@@ -50,4 +62,6 @@ public class Ticket extends BaseModel{
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
     }
+
+
 }

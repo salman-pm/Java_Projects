@@ -10,7 +10,8 @@ import java.util.List;
 public class ParkingLot extends BaseModel{
     private String name;
     private String address;
-    private int capacity;
+    private int availableCapacity;
+    private int totalCapacity;
     private List<ParkingFloor> parkingFloorList;
     private List<VehicleType> supportedVehicleTypeList;
     private ParkingLotStatus parkingLotStatus;
@@ -20,13 +21,14 @@ public class ParkingLot extends BaseModel{
     public ParkingLot(){
     }
 
-    public ParkingLot(String name, String address, int capacity,
+    public ParkingLot(String name, String address, int availableCapacity, int totalCapacity,
                       List<ParkingFloor> parkingFloorList, List<VehicleType> supportedVehicleTypeList,
                       ParkingLotStatus parkingLotStatus, BillCalculationStrategy billCalculationStrategy,
                       SpotAllocationStrategy spotAllocationStrategy) {
         this.name = name;
         this.address = address;
-        this.capacity = capacity;
+        this.availableCapacity = availableCapacity;
+        this.totalCapacity = totalCapacity;
         this.parkingFloorList = parkingFloorList;
         this.supportedVehicleTypeList = supportedVehicleTypeList;
         this.parkingLotStatus = parkingLotStatus;
@@ -50,12 +52,20 @@ public class ParkingLot extends BaseModel{
         this.address = address;
     }
 
-    public int getCapacity() {
-        return capacity;
+    public int getAvailableCapacity() {
+        return availableCapacity;
     }
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
+    public void setAvailableCapacity(int availableCapacity) {
+        this.availableCapacity = availableCapacity;
+    }
+
+    public int getTotalCapacity() {
+        return totalCapacity;
+    }
+
+    public void setTotalCapacity(int totalCapacity) {
+        this.totalCapacity = totalCapacity;
     }
 
     public List<ParkingFloor> getParkingFloorList() {
