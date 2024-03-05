@@ -6,10 +6,7 @@ import ParkingLot.exceptions.ParkingLotClosedException;
 import ParkingLot.models.*;
 import ParkingLot.models.enums.ParkingLotStatus;
 import ParkingLot.models.enums.ParkingSpotStatus;
-import ParkingLot.repository.GateRepository;
-import ParkingLot.repository.ParkingLotRepository;
-import ParkingLot.repository.ParkingSpotRepository;
-import ParkingLot.repository.TicketRepository;
+import ParkingLot.repository.*;
 import ParkingLot.services.spotAllocationStrategy.SpotAllocationStrategy;
 import ParkingLot.services.spotAllocationStrategy.SpotAllocationStrategyFactory;
 
@@ -20,13 +17,18 @@ public class TicketService {
     ParkingLotRepository parkingLotRepository;
     GateRepository gateRepository;
     ParkingSpotRepository parkingSpotRepository;
+    VehicleRepository vehicleRepository;
 
-    public TicketService(TicketRepository ticketRepository, ParkingLotRepository parkingLotRepository,
-                         GateRepository gateRepository, ParkingSpotRepository parkingSpotRepository) {
+    public TicketService(TicketRepository ticketRepository,
+                         ParkingLotRepository parkingLotRepository,
+                         GateRepository gateRepository,
+                         ParkingSpotRepository parkingSpotRepository,
+                         VehicleRepository vehicleRepository) {
         this.ticketRepository = ticketRepository;
         this.parkingLotRepository = parkingLotRepository;
         this.gateRepository = gateRepository;
         this.parkingSpotRepository = parkingSpotRepository;
+        this.vehicleRepository = vehicleRepository;
     }
 
     public Ticket generateTicket(Vehicle vehicle, int parkingLotID, int gateID){

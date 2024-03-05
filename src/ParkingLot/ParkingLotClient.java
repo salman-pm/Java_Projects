@@ -1,11 +1,15 @@
 package ParkingLot;
 
+import ParkingLot.controllers.BillController;
 import ParkingLot.controllers.InitializationController;
 import ParkingLot.controllers.TicketController;
+import ParkingLot.exceptions.InvalidInputOptionException;
+import ParkingLot.models.Bill;
 import ParkingLot.models.Ticket;
 import ParkingLot.models.Vehicle;
 import ParkingLot.models.enums.VehicleType;
 import ParkingLot.repository.*;
+import ParkingLot.services.BillService;
 import ParkingLot.services.InitializationService;
 import ParkingLot.services.TicketService;
 
@@ -19,6 +23,8 @@ public class ParkingLotClient {
         ParkingSpotRepository parkingSpotRepository = new ParkingSpotRepository();
         GateRepository gateRepository = new GateRepository();
         TicketRepository ticketRepository = new TicketRepository();
+        VehicleRepository vehicleRepository = new VehicleRepository();
+        BillRepository billRepository = new BillRepository();
 
         InitializationService initializationService = new InitializationService(
                 parkingLotRepository,
@@ -31,19 +37,21 @@ public class ParkingLotClient {
                 ticketRepository,
                 parkingLotRepository,
                 gateRepository,
-                parkingSpotRepository
+                parkingSpotRepository,
+                vehicleRepository
         );
 
+        BillService billService = new BillService(billRepository, gateRepository, ticketRepository, parkingSpotRepository);
+
         TicketController ticketController = new TicketController(ticketService);
+        BillController billController = new BillController(billService);
         InitializationController initializationController = new InitializationController(initializationService);
 
         System.out.println("*** Parking Lot Data Initialization - START ***");
         initializationController.init();
         System.out.println("*** Parking Lot Data Initialization - Initialization END ***");
         System.out.println("Please choose an option");
-        System.out.println("1. Enter Parking Lot ");
-        System.out.println("2. Exit Parking Lot ");
-        System.out.println("3. Exit");
+        System.out.println("1.Enter Parking Lot | 2.Exit Parking Lot | 3.Exit Menu");
         int option = sc.nextInt();
         while(true){
             if(option == 1){
@@ -77,12 +85,24 @@ public class ParkingLotClient {
                 System.out.println(ticket);
             }
             else if(option == 2){
-                // generate bill
+                System.out.println("Please enter the Ticket Id");
+                int ticketIdInput = sc.nextInt();
+                System.out.println("Please enter the Exit gate Id");
+                int exitGateIdInput = sc.nextInt();
+                Bill bill = billController.generateBill(ticketIdInput, exitGateIdInput);
+                System.out.println("Bill details: ");
+                System.out.println(bill);
             }
-            else{
+            else if(option == 3){
                 System.out.println("Thanks for Visiting");
                 break;
             }
+            else{
+                throw new InvalidInputOptionException("Please enter a valid option");
+            }
+            System.out.println("Please choose an option");
+            System.out.println("1.Enter Parking Lot | 2.Exit Parking Lot | 3.Exit Menu");
+            option = sc.nextInt();
         }
 
     }

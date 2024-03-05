@@ -2,7 +2,9 @@ package ParkingLot.models;
 
 import ParkingLot.models.enums.BillStatus;
 
+import javax.swing.text.DateFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Bill extends BaseModel{
     private LocalDateTime exitTime;
@@ -20,6 +22,17 @@ public class Bill extends BaseModel{
         this.billStatus = billStatus;
         this.ticket = ticket;
         this.exitGate = exitGate;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                " \nexitTime: " + DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").format(exitTime) +
+                ", \namount: Rs." + amount +
+                ", \nbillStatus: " + billStatus +
+                ", \nticket Id: " + ticket.getId() +
+                ", \nexitGate Number: " + exitGate.getGateNumber() +
+                "\n}";
     }
 
     public LocalDateTime getExitTime() {

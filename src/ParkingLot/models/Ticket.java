@@ -24,7 +24,7 @@ public class Ticket extends BaseModel{
     public String toString() {
         return "{" +
                 " \nTicket Id: " + getId() +
-                " \nEntryTime: " + DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").format(entryTime) +
+                ", \nEntryTime: " + DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").format(entryTime) +
                 ", \nEntryGate Number: " + entryGate.getGateNumber() +
                 ", \nParkingSpot Number: " + parkingSpot.getSpotNumber() +
                 ", \nVehicle Number: " + vehicle.getVehicleNumber() +

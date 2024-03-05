@@ -13,6 +13,7 @@ import ParkingLot.models.enums.ParkingSpotStatus;
 import java.util.List;
 
 public class LinearSpotAllocationStrategy implements SpotAllocationStrategy{
+
     private boolean validateParkingSpot(ParkingSpot parkingSpot, Vehicle vehicle){
         if(parkingSpot.getParkingSpotStatus().equals(ParkingSpotStatus.EMPTY) &&
                         parkingSpot.getVehicleType().equals(vehicle.getVehicleType())
@@ -21,12 +22,14 @@ public class LinearSpotAllocationStrategy implements SpotAllocationStrategy{
         }
         return false;
     }
+
     private boolean validateParkingFloor(ParkingFloor parkingFloor){
         if(parkingFloor.getParkingFloorStatus().equals(ParkingFloorStatus.AVAILABLE)){
             return true;
         }
         return false;
     }
+
     @Override
     public ParkingSpot allocateSpotForVehicle(ParkingLot parkingLot, Vehicle vehicle) {
         //iterate through each parking spots in each floor(linear iteration) and find the empty spot
@@ -42,4 +45,5 @@ public class LinearSpotAllocationStrategy implements SpotAllocationStrategy{
         }
         throw new ParkingSpotNotFoundForVehicleException("There is no parking spot found for this vehicle");
     }
+
 }
