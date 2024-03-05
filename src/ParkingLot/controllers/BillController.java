@@ -10,7 +10,7 @@ public class BillController {
         this.billService = billService;
     }
 
-    public Bill generateBill(int ticketID, int exitGateID){
-        return billService.generateBill(ticketID, exitGateID);
+    public Bill generateBill(int parkingLotID, int ticketID, int exitGateID){
+        return billService.generateBill(parkingLotID, ticketID, exitGateID);
     }
 }

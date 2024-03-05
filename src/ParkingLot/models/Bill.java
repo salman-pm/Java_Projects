@@ -27,12 +27,12 @@ public class Bill extends BaseModel{
     @Override
     public String toString() {
         return "{" +
-                " \nexitTime: " + DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").format(exitTime) +
-                ", \namount: Rs." + amount +
-                ", \nbillStatus: " + billStatus +
-                ", \nticket Id: " + ticket.getId() +
-                ", \nexitGate Number: " + exitGate.getGateNumber() +
-                "\n}";
+                " \n Exit Time: " + DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm").format(exitTime) +
+                ", \n Amount: Rs." + amount +
+                ", \n Bill Status: " + billStatus +
+                ", \n Ticket Id: " + ticket.getId() +
+                ", \n ExitGate Number: " + exitGate.getGateNumber() +
+                "\n }";
     }
 
     public LocalDateTime getExitTime() {

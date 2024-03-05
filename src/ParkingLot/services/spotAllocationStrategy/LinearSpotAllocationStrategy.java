@@ -1,7 +1,5 @@
 package ParkingLot.services.spotAllocationStrategy;
 
-import ParkingLot.exceptions.ParkingFloorCapacityFullException;
-import ParkingLot.exceptions.ParkingSpotNotFoundException;
 import ParkingLot.exceptions.ParkingSpotNotFoundForVehicleException;
 import ParkingLot.models.ParkingFloor;
 import ParkingLot.models.ParkingLot;

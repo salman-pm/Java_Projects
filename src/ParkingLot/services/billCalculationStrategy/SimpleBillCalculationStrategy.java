@@ -11,7 +11,7 @@ import java.time.temporal.ChronoUnit;
 /*
    charge = 2 rupee per second
 */
-public class SimpleBillCalculationStrategy implements BillCalculationStrategy{
+public class SimpleBillCalculationStrategy extends BillCalculationStrategy {
     @Override
     public double calculateBillAmount(Ticket ticket) {
         LocalDateTime entryTime = ticket.getEntryTime();

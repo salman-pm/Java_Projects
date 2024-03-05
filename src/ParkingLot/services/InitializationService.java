@@ -33,7 +33,7 @@ public class InitializationService {
         parkingLot.setName("ABC Parking Lot");
         parkingLot.setAddress("Somewhere under the sky");
         parkingLot.setTotalCapacity(100);
-        parkingLot.setAvailableCapacity(100);
+        parkingLot.setAvailableCapacity(5);
         parkingLot.setParkingLotStatus(ParkingLotStatus.OPEN);
         parkingLot.setSupportedVehicleTypeList(List.of(VehicleType.BIKE, VehicleType.CAR));
 
@@ -56,6 +56,9 @@ public class InitializationService {
                 parkingSpot.setSpotNumber((i*100) + j);
                 parkingSpot.setParkingSpotStatus(ParkingSpotStatus.EMPTY);
                 parkingSpot.setVehicleType(VehicleType.CAR);
+                if(i == 5){
+                    parkingSpot.setVehicleType(VehicleType.BIKE);
+                }
                 //add each parking spots into the list
                 parkingSpotList.add(parkingSpot);
                 //save each parking spot into repository

@@ -8,6 +8,7 @@ public class Ticket extends BaseModel{
     private Gate entryGate;
     private ParkingSpot parkingSpot;
     private Vehicle vehicle;
+    private double surgeFactor;
 
     public Ticket(){
 
@@ -63,5 +64,11 @@ public class Ticket extends BaseModel{
         this.vehicle = vehicle;
     }
 
+    public double getSurgeFactor() {
+        return surgeFactor;
+    }
 
+    public void setSurgeFactor(double surgeFactor) {
+        this.surgeFactor = surgeFactor;
+    }
 }

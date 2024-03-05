@@ -10,8 +10,8 @@ import java.util.List;
 public class ParkingLot extends BaseModel{
     private String name;
     private String address;
-    private int availableCapacity;
-    private int totalCapacity;
+    private static int availableCapacity;
+    private static int totalCapacity;
     private List<ParkingFloor> parkingFloorList;
     private List<VehicleType> supportedVehicleTypeList;
     private ParkingLotStatus parkingLotStatus;

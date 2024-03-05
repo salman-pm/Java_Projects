@@ -41,7 +41,13 @@ public class ParkingLotClient {
                 vehicleRepository
         );
 
-        BillService billService = new BillService(billRepository, gateRepository, ticketRepository, parkingSpotRepository);
+        BillService billService = new BillService(
+                billRepository,
+                gateRepository,
+                ticketRepository,
+                parkingSpotRepository,
+                parkingLotRepository
+        );
 
         TicketController ticketController = new TicketController(ticketService);
         BillController billController = new BillController(billService);
@@ -85,11 +91,13 @@ public class ParkingLotClient {
                 System.out.println(ticket);
             }
             else if(option == 2){
+                System.out.println("Please enter the Parking lot Id");
+                int parkingLotIdInput = sc.nextInt();
                 System.out.println("Please enter the Ticket Id");
                 int ticketIdInput = sc.nextInt();
                 System.out.println("Please enter the Exit gate Id");
                 int exitGateIdInput = sc.nextInt();
-                Bill bill = billController.generateBill(ticketIdInput, exitGateIdInput);
+                Bill bill = billController.generateBill(parkingLotIdInput, ticketIdInput, exitGateIdInput);
                 System.out.println("Bill details: ");
                 System.out.println(bill);
             }

@@ -9,6 +9,8 @@ import ParkingLot.models.enums.ParkingSpotStatus;
 import ParkingLot.repository.*;
 import ParkingLot.services.spotAllocationStrategy.SpotAllocationStrategy;
 import ParkingLot.services.spotAllocationStrategy.SpotAllocationStrategyFactory;
+import ParkingLot.services.surgeCalculationStrategy.SurgeCalculationStrategy;
+import ParkingLot.services.surgeCalculationStrategy.SurgeCalculationStrategyFactory;
 
 import java.time.LocalDateTime;
 
@@ -63,6 +65,10 @@ public class TicketService {
         }
         parkingLotRepository.update(parkingLot);
 
+        //get surge for vehicle
+        SurgeCalculationStrategy surgeCalculationStrategy =
+                SurgeCalculationStrategyFactory.getSurgeCalculationFactory(vehicle.getVehicleType());
+        double surge = surgeCalculationStrategy.calculateSurge(parkingLot);
 
         //generate ticket
         Ticket ticket = new Ticket();
@@ -70,6 +76,7 @@ public class TicketService {
         ticket.setVehicle(vehicle);
         ticket.setEntryGate(entryGate);
         ticket.setParkingSpot(allocatedSpot);
+        ticket.setSurgeFactor(surge);
         //update in the ticket repository
         ticketRepository.put(ticket);
         //return the ticket after updating calling put() - will generate ticket id
