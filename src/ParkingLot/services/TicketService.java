@@ -1,7 +1,10 @@
 package ParkingLot.services;
 
 import ParkingLot.exceptions.NoSpaceAvailableException;
+import ParkingLot.exceptions.ParkingLotCapacityFullException;
+import ParkingLot.exceptions.ParkingLotClosedException;
 import ParkingLot.models.*;
+import ParkingLot.models.enums.ParkingLotStatus;
 import ParkingLot.models.enums.ParkingSpotStatus;
 import ParkingLot.repository.GateRepository;
 import ParkingLot.repository.ParkingLotRepository;
@@ -31,6 +34,14 @@ public class TicketService {
         ParkingLot parkingLot = parkingLotRepository.get(parkingLotID);
         Gate entryGate = gateRepository.get(gateID);
 
+        //validate parking lot status
+        if(parkingLot.getParkingLotStatus().equals(ParkingLotStatus.CLOSED)){
+            throw new ParkingLotClosedException("Parking lot is closed");
+        }
+        else if (parkingLot.getParkingLotStatus().equals(ParkingLotStatus.FULL)) {
+            throw new ParkingLotCapacityFullException("No space available! Parking lot capacity is full.");
+        }
+
         //validate parking lot capacity
         if(parkingLot.getAvailableCapacity() <= 0){
             throw new NoSpaceAvailableException("Parking lot is FULL");
@@ -43,6 +54,13 @@ public class TicketService {
         allocatedSpot.setVehicle(vehicle);
         //update in the repository
         parkingSpotRepository.put(allocatedSpot);
+        //update the current available capacity and update in repository
+        parkingLot.setAvailableCapacity(parkingLot.getAvailableCapacity() - 1);
+        if(parkingLot.getAvailableCapacity() == 0){
+            parkingLot.setParkingLotStatus(ParkingLotStatus.FULL);
+        }
+        parkingLotRepository.update(parkingLot);
+
 
         //generate ticket
         Ticket ticket = new Ticket();
